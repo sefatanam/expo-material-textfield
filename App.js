@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 export default class App extends Component{
   render(){
     return(
-      <NavigationContainer>
+      <NavigationContainer >
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Form" component={FormScreen} />

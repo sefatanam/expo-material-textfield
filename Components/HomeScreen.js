@@ -1,15 +1,17 @@
 import * as React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import { Button } from "react-native-paper";
+
 
 function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
-      <Button
-        style={styles.buttonStyle}
-        title="Form"
+      <Button icon='google'
+        mode="contained"
+        style={styles.button}
         onPress={() => navigation.navigate("Form")}
-      />
+      >Go To Form</Button>
     </View>
   );
 }
@@ -17,14 +19,14 @@ function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    padding: 16,
+    alignItems:'center',
     justifyContent: "center",
   },
-  buttonStyle: {
 
-    color:"green",
-    width:150,
-    margin:7
+  button: {
+    margin: 8,
+    backgroundColor: "#6200ee"
   },
 });
 export default HomeScreen;
