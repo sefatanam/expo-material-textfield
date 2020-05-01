@@ -1,63 +1,31 @@
 import React, { Component } from "react";
-import {
-  TextField,
-  OutlinedTextField,
-  FilledTextField,
-} from "react-native-material-textfield";
-import { View, Text, StyleSheet } from "react-native";
+import { View ,Text,StyleSheet} from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+//Screens
+import HomeScreen from './Components/HomeScreen';
+import FormScreen from './Components/FormScreen'
 
-export default class App extends Component {
-  state = {
-    phone: "",
-  };
+const Stack = createStackNavigator();
 
-  render() {
-    let { phone } = this.state;
-
-    return (
-      <View style={styles.container}>
-        <TextField
-        
-          label="Phone number"
-          value={phone}
-          onChangeText={(phone) => this.setState({ phone })}
-        />
-
-        <OutlinedTextField
-        style={styles.color}
-          label="Phone number"
-          value={phone}
-          onChangeText={(phone) => this.setState({ phone })}
-        />
-        <FilledTextField
-          style={styles.color}
-          label="Phone number"
-          value={phone}
-          onChangeText={(phone) => this.setState({ phone })}
-        />
-      </View>
-    );
+export default class App extends Component{
+  render(){
+    return(
+      <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Form" component={FormScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+    )
   }
 }
 
 const styles = StyleSheet.create({
-container:{
-  width:350,
-  padding:20,
-  margin:8,
-  justifyContent:"center",
-  flex:1,
-  alignContent:'space-around'
-  
-  
-}
-,
-color:{
-  color:"#6200ee",
-  marginBottom:10,
-  flexDirection:'row',
-  flex:1,
-  justifyContent:'center'
-  
-}
-});
+  container:{
+    justifyContent:'center',
+    flex:1,
+    flexDirection:'row',
+    alignItems:'center'
+  }
+})
