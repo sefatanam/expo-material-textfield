@@ -1,10 +1,9 @@
-import 'react-native-gesture-handler';  
+import "react-native-gesture-handler";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-
 
 import { AuthContext } from "./Components/Contex";
 import {
@@ -15,7 +14,7 @@ import {
   Details,
   Search2,
   Profile,
-  Splash
+  Splash,
 } from "./Components/Screens";
 
 const AuthStack = createStackNavigator();
@@ -24,12 +23,24 @@ const AuthStackScreen = () => (
     <AuthStack.Screen
       name="SignIn"
       component={SignIn}
-      options={{ title: "Sign In" }}
+      options={{
+        title: "Sign In",
+        headerStyle: {
+          backgroundColor: "#6200ee",
+        },
+        headerTintColor: "white",
+      }}
     />
     <AuthStack.Screen
       name="CreateAccount"
       component={CreateAccount}
-      options={{ title: "Create Account" }}
+      options={{
+        title: "Create Account",
+        headerStyle: {
+          backgroundColor: "#6200ee",
+        },
+        headerTintColor: "white",
+      }}
     />
   </AuthStack.Navigator>
 );
@@ -40,12 +51,21 @@ const SearchStack = createStackNavigator();
 
 const HomeStackScreen = () => (
   <HomeStack.Navigator>
-    <HomeStack.Screen name="Home" component={Home} />
+    <HomeStack.Screen
+      name="Home"
+      component={Home}
+      options={{
+        headerStyle: { backgroundColor: "#6200ee" },
+        headerTintColor: "white",
+      }}
+    />
     <HomeStack.Screen
       name="Details"
       component={Details}
       options={({ route }) => ({
-        title: route.params.name
+        title: route.params.name,
+        headerStyle: { backgroundColor: "#6200ee" },
+        headerTintColor: "white",
       })}
     />
   </HomeStack.Navigator>
@@ -53,30 +73,79 @@ const HomeStackScreen = () => (
 
 const SearchStackScreen = () => (
   <SearchStack.Navigator>
-    <SearchStack.Screen name="Search" component={Search} />
-    <SearchStack.Screen name="Search2" component={Search2} />
+    <SearchStack.Screen
+      name="Search"
+      component={Search}
+      options={{
+        headerStyle: { backgroundColor: "#6200ee" },
+        headerTintColor: "white",
+      }}
+    />
+    <SearchStack.Screen
+      name="Search2"
+      component={Search2}
+      options={{
+        headerStyle: { backgroundColor: "#6200ee" },
+        headerTintColor: "white",
+      }}
+    />
   </SearchStack.Navigator>
 );
 
 const ProfileStack = createStackNavigator();
 const ProfileStackScreen = () => (
   <ProfileStack.Navigator>
-    <ProfileStack.Screen name="Profile" component={Profile} />
+    <ProfileStack.Screen
+      name="Profile"
+      component={Profile}
+      options={{
+        headerStyle: { backgroundColor: "#6200ee" },
+        headerTintColor: "white",
+      }}
+    />
   </ProfileStack.Navigator>
 );
 
 const TabsScreen = () => (
   <Tabs.Navigator>
-    <Tabs.Screen name="Home" component={HomeStackScreen} />
-    <Tabs.Screen name="Search" component={SearchStackScreen} />
+    <Tabs.Screen
+      name="Home"
+      component={HomeStackScreen}
+      options={{
+        headerStyle: { backgroundColor: "#6200ee" },
+        headerTintColor: "white",
+      }}
+    />
+    <Tabs.Screen
+      name="Search"
+      component={SearchStackScreen}
+      options={{
+        headerStyle: { backgroundColor: "#6200ee" },
+        headerTintColor: "white",
+      }}
+    />
   </Tabs.Navigator>
 );
 
 const Drawer = createDrawerNavigator();
 const DrawerScreen = () => (
   <Drawer.Navigator initialRouteName="Profile">
-    <Drawer.Screen name="Home" component={TabsScreen} />
-    <Drawer.Screen name="Profile" component={ProfileStackScreen} />
+    <Drawer.Screen
+      name="Home"
+      component={TabsScreen}
+      options={{
+        headerStyle: { backgroundColor: "#6200ee" },
+        headerTintColor: "white",
+      }}
+    />
+    <Drawer.Screen
+      name="Profile"
+      component={ProfileStackScreen}
+      options={{
+        headerStyle: { backgroundColor: "#6200ee" },
+        headerTintColor: "white",
+      }}
+    />
   </Drawer.Navigator>
 );
 
@@ -89,7 +158,9 @@ const RootStackScreen = ({ userToken }) => (
         name="App"
         component={DrawerScreen}
         options={{
-          animationEnabled: false
+          animationEnabled: false,
+          headerStyle: { backgroundColor: "#6200ee" },
+          headerTintColor: "white",
         }}
       />
     ) : (
@@ -97,7 +168,9 @@ const RootStackScreen = ({ userToken }) => (
         name="Auth"
         component={AuthStackScreen}
         options={{
-          animationEnabled: false
+          animationEnabled: false,
+          headerStyle: { backgroundColor: "#6200ee" },
+          headerTintColor: "white",
         }}
       />
     )}
@@ -107,8 +180,6 @@ const RootStackScreen = ({ userToken }) => (
 export default () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [userToken, setUserToken] = React.useState(null);
- 
-  
 
   const authContext = React.useMemo(() => {
     return {
@@ -123,7 +194,7 @@ export default () => {
       signOut: () => {
         setIsLoading(false);
         setUserToken(null);
-      }
+      },
     };
   }, []);
 
@@ -138,9 +209,21 @@ export default () => {
   }
 
   return (
-    <AuthContext.Provider value={authContext} >
+    <AuthContext.Provider
+      value={authContext}
+      options={{
+        headerStyle: { backgroundColor: "#6200ee" },
+        headerTintColor: "white",
+      }}
+    >
       <NavigationContainer>
-        <RootStackScreen userToken={userToken}  />
+        <RootStackScreen
+          userToken={userToken}
+          options={{
+            headerStyle: { backgroundColor: "#6200ee" },
+            headerTintColor: "white",
+          }}
+        />
       </NavigationContainer>
     </AuthContext.Provider>
   );
