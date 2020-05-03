@@ -91,7 +91,7 @@ export const Splash = () => (
 
 export const SignIn = ({ navigation }) => {
   const { signIn } = React.useContext(AuthContext);
-
+  console.log("From Signin account screen :"+navigation);
   return (
     <ScreenContainer>
       <Text>Sign In Screen</Text>
@@ -110,6 +110,7 @@ export const CreateAccount = () => {
   return (
     <ScreenContainer>
       <Text>Create Account Screen</Text>
+      
       <Button title="Sign Up" onPress={() => signUp()} />
     </ScreenContainer>
   );
