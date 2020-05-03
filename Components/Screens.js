@@ -7,14 +7,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   button: {
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginVertical: 10,
-    borderRadius: 5
-  }
+    borderRadius: 5,
+  },
 });
 
 const ScreenContainer = ({ children }) => (
@@ -51,12 +51,13 @@ export const Search = ({ navigation }) => (
   <ScreenContainer>
     <Text>Search Screen</Text>
     <Button title="Search 2" onPress={() => navigation.push("Search2")} />
+
     <Button
       title="React Native School"
       onPress={() => {
         navigation.navigate("Home", {
           screen: "Details",
-          params: { name: "React Native School" }
+          params: { name: "React Native School" },
         });
       }}
     />
@@ -70,6 +71,7 @@ export const Search2 = () => (
 );
 
 export const Profile = ({ navigation }) => {
+
   const { signOut } = React.useContext(AuthContext);
 
   return (
