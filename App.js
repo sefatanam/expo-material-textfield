@@ -138,9 +138,9 @@ export default () => {
   }
 
   return (
-    <AuthContext.Provider value={authContext}>
+    <AuthContext.Provider value={authContext} >
       <NavigationContainer>
-        <RootStackScreen userToken={userToken} />
+        <RootStackScreen userToken={userToken}  />
       </NavigationContainer>
     </AuthContext.Provider>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import { OutlinedTextField } from "react-native-material-textfield";
+import { Formik } from "formik";
 
 import { AuthContext } from "./Contex";
 
@@ -16,6 +17,18 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginVertical: 10,
     borderRadius: 5,
+  },
+  signInContainer: {
+    alignContent: "center",
+    width: 350,
+  },
+
+  textStyles: {
+    fontSize: 25,
+    margin: 8,
+    fontFamily: "sans-serif",
+    fontWeight: "bold",
+    color:'#6200ee'
   },
 });
 
@@ -95,12 +108,54 @@ export const Splash = () => (
 
 export const SignIn = ({ navigation }) => {
   const { signIn } = React.useContext(AuthContext);
+  const isAuthIsRight = (values) => {
+    console.log(values);
+    if (values.emailOrPhoneNumber != "" && values.password != "") {
+      return signIn();
+    }
+  };
   console.log("From Signin account screen :" + navigation);
   return (
     <ScreenContainer>
-      <Text>Sign In Screen</Text>
+      <Text style={styles.textStyles}>Jomidar Login</Text>
 
-      <Button onPress={() => signIn()}>Sign In</Button>
+      <Formik
+        initialValues={{ emailOrPhoneNumber: "", password: "" }}
+        onSubmit={(values) => isAuthIsRight(values)}
+      >
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          touched,
+          errors,
+          isSubmitting,
+        }) => {
+          return (
+            <View style={styles.signInContainer}>
+              <OutlinedTextField
+                label="Email or Phone Number"
+                onChangeText={handleChange("emailOrPhoneNumber")}
+                onBlur={handleBlur("emailOrPhoneNumber")}
+                value={values.emailOrPhoneNumber}
+                style={{borderColor:'#6200ee'}}
+              />
+              <OutlinedTextField
+                label="Password"
+                onChangeText={handleChange("password")}
+                onBlur={handleBlur("password")}
+                value={values.password}
+              />
+              <Button mode="outlined" onPress={handleSubmit}>
+                Sign In
+              </Button>
+            </View>
+          );
+        }}
+      </Formik>
+
+      {/* <Button onPress={() => signIn()}>Sign In</Button> */}
       <Button onPress={() => navigation.push("CreateAccount")}>
         Create Account
       </Button>
