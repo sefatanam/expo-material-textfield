@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
-import { OutlinedTextField } from "react-native-material-textfield";
+import { OutlinedTextField , TextField} from "react-native-material-textfield";
 import { Formik } from "formik";
 
 import { AuthContext } from "./Contex";
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     margin: 8,
     fontFamily: "sans-serif",
     fontWeight: "bold",
-    color:'#6200ee'
+    color: "#6200ee",
   },
 });
 
@@ -134,14 +134,14 @@ export const SignIn = ({ navigation }) => {
         }) => {
           return (
             <View style={styles.signInContainer}>
-              <OutlinedTextField
+              <TextField
                 label="Email or Phone Number"
                 onChangeText={handleChange("emailOrPhoneNumber")}
                 onBlur={handleBlur("emailOrPhoneNumber")}
                 value={values.emailOrPhoneNumber}
-                style={{borderColor:'#6200ee'}}
+                style={{ borderColor: "#6200ee" }}
               />
-              <OutlinedTextField
+              <TextField
                 label="Password"
                 onChangeText={handleChange("password")}
                 onBlur={handleBlur("password")}
@@ -165,12 +165,68 @@ export const SignIn = ({ navigation }) => {
 
 export const CreateAccount = () => {
   const { signUp } = React.useContext(AuthContext);
-
+  const isAuthIsRight = (values) => {
+    console.log(values);
+    if (values.emailOrPhone != "" && values.password != "" && values.confirmPassword!="" && values.name!="") {
+      return signUp();
+    }
+  };
   return (
     <ScreenContainer>
-      <Text>Create Account Screen</Text>
+      <Text style={styles.textStyles}>Create Account Screen</Text>
+      <Formik
+        initialValues={{
+          name: "",
+          emailOrPhone: "",
+          password: "",
+          confirmPassword: "",
+        }}
+        onSubmit={(values) => isAuthIsRight(values)}
+      >
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          touched,
+          errors,
+          isSubmitting,
+        }) => {
+          return (
+            <View style={styles.signInContainer}>
+              <OutlinedTextField
+                label="Your Name"
+                onChangeText={handleChange("name")}
+                onBlur={handleBlur("name")}
+                value={values.name}
+              />
+              <OutlinedTextField
+                label="Email or Phone"
+                onChangeText={handleChange("emailOrPhone")}
+                onBlur={handleBlur("emailOrPhone")}
+                value={values.emailOrPhone}
+              />
+              <OutlinedTextField
+                label="Password"
+                onChangeText={handleChange("password")}
+                onBlur={handleBlur("password")}
+                value={values.password}
+              />
+              <OutlinedTextField
+                label="Confirm Password"
+                onChangeText={handleChange("confirmPassword")}
+                onBlur={handleBlur("confirmPassword")}
+                value={values.confirmPassword}
+              />
+              <Button mode="outlined" onPress={handleSubmit}>
+                Sign Up
+              </Button>
+            </View>
+          );
+        }}
+      </Formik>
 
-      <Button onPress={() => signUp()}>Sign Up</Button>
+      {/* <Button onPress={() => signUp()}>Sign Up</Button> */}
     </ScreenContainer>
   );
 };
