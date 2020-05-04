@@ -94,12 +94,21 @@ const SearchStackScreen = () => (
 );
 
 const ProfileStack = createStackNavigator();
-const ProfileStackScreen = () => (
+const ProfileStackScreen = ({ navigation }) => (
   <ProfileStack.Navigator>
     <ProfileStack.Screen
       name="Profile"
       component={Profile}
       options={{
+        headerLeft: () => (
+          <MaterialCommunityIcons.Button
+            name="menu"
+            color="#fff"
+            backgroundColor="#6200ee"
+            size={26}
+            onPress={() => navigation.toggleDrawer()}
+          />
+        ),
         headerStyle: { backgroundColor: "#6200ee" },
         headerTintColor: "white",
       }}
@@ -115,6 +124,17 @@ const TabsScreen = () => (
     barStyle={{ backgroundColor: "#6200ee" }}
   >
     <Tabs.Screen
+      name="Search"
+      component={SearchStackScreen}
+      options={{
+        tabBarLabel: "Search",
+        tabBarColor: "#6200ee",
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="account" color={color} size={26} />
+        ),
+      }}
+    />
+    <Tabs.Screen
       name="Home"
       component={HomeStackScreen}
       options={{
@@ -126,23 +146,20 @@ const TabsScreen = () => (
         ),
       }}
     />
-    <Tabs.Screen
-      name="Search"
-      component={SearchStackScreen}
-      options={{
-        tabBarLabel: "Search",
-        tabBarColor: "#6200ee",
-        tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="account" color={color} size={26} />
-        ),
-      }}
-    />
   </Tabs.Navigator>
 );
 
 const Drawer = createDrawerNavigator();
 const DrawerScreen = () => (
   <Drawer.Navigator initialRouteName="Profile">
+     <Drawer.Screen
+      name="Profile"
+      component={ProfileStackScreen}
+      options={{
+        headerStyle: { backgroundColor: "#6200ee" },
+        headerTintColor: "white",
+      }}
+    />
     <Drawer.Screen
       name="Home"
       component={TabsScreen}
@@ -151,14 +168,7 @@ const DrawerScreen = () => (
         headerTintColor: "white",
       }}
     />
-    <Drawer.Screen
-      name="Profile"
-      component={ProfileStackScreen}
-      options={{
-        headerStyle: { backgroundColor: "#6200ee" },
-        headerTintColor: "white",
-      }}
-    />
+   
   </Drawer.Navigator>
 );
 

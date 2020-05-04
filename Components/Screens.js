@@ -94,7 +94,7 @@ export const Profile = ({ navigation }) => {
   return (
     <ScreenContainer>
       <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.toggleDrawer()}>Drawer</Button>
+      {/* <Button onPress={() => navigation.toggleDrawer()}>Drawer</Button> */}
       <Button onPress={() => signOut()}>Sign Out</Button>
     </ScreenContainer>
   );
