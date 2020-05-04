@@ -2,9 +2,10 @@ import "react-native-gesture-handler";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { AuthContext } from "./Components/Contex";
 import {
   SignIn,
@@ -45,7 +46,7 @@ const AuthStackScreen = () => (
   </AuthStack.Navigator>
 );
 
-const Tabs = createBottomTabNavigator();
+const Tabs = createMaterialBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const SearchStack = createStackNavigator();
 
@@ -107,21 +108,33 @@ const ProfileStackScreen = () => (
 );
 
 const TabsScreen = () => (
-  <Tabs.Navigator>
+  <Tabs.Navigator
+    initialRouteName="Home"
+    activeColor="#f0edf6"
+    inactiveColor="#aca7a7"
+    barStyle={{ backgroundColor: "#6200ee" }}
+  >
     <Tabs.Screen
       name="Home"
       component={HomeStackScreen}
       options={{
-        headerStyle: { backgroundColor: "#6200ee" },
-        headerTintColor: "white",
+        tabBarLabel: "Home",
+        tabBarColor: "#6200ee",
+
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="home" color={color} size={26} />
+        ),
       }}
     />
     <Tabs.Screen
       name="Search"
       component={SearchStackScreen}
       options={{
-        headerStyle: { backgroundColor: "#6200ee" },
-        headerTintColor: "white",
+        tabBarLabel: "Search",
+        tabBarColor: "#6200ee",
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="account" color={color} size={26} />
+        ),
       }}
     />
   </Tabs.Navigator>
