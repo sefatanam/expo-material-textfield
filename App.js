@@ -17,7 +17,7 @@ import {
   Profile,
   Splash,
 } from "./Components/Screens";
-
+import {DrawerContent} from './Components/DrawerContent';
 const AuthStack = createStackNavigator();
 const AuthStackScreen = () => (
   <AuthStack.Navigator>
@@ -151,7 +151,7 @@ const TabsScreen = () => (
 
 const Drawer = createDrawerNavigator();
 const DrawerScreen = () => (
-  <Drawer.Navigator initialRouteName="Profile">
+  <Drawer.Navigator initialRouteName="Profile" drawerContent={props=><DrawerContent {...props}/>}>
      <Drawer.Screen
       name="Profile"
       component={ProfileStackScreen}
